@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --card-padding: 5px 10px;
+  --card-margin: 10px 10px;
+  --card-border-radius: 10px;
+  --card-bg-color: #FFF5EE;
+  --button-padding: 10px 10px;
+}
+
+.country-card {
+  background-color: var(--card-bg-color);
+  padding: var(--card-padding);
+  margin: var(--card-margin);
+  border-radius: var(--card-border-radius);
+
+}
