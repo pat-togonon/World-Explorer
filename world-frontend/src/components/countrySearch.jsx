@@ -1,24 +1,33 @@
 import { useState } from "react"
-import { fetchOneCountry } from "../service/countryService"
+import { useOneCountryStore } from "../store/oneCountryStore"
+import { Outlet, useNavigate } from "react-router-dom"
 
 const CountrySearch = () => {
 
   const [countryToSearch, setCountryToSearch] = useState('')
+  const setOneCountry = useOneCountryStore(state => state.setOneCountry)
+  const fetchOneCountry = useOneCountryStore(state => state.fetchOneCountry)
+  const oneCountryDetails = useOneCountryStore(state => state.oneCountryDetails)
+  const navigate = useNavigate()
 
-  const handleCountrySearch = async (_event) => {
+  console.log('one c de', oneCountryDetails)
+
+  const handleCountrySearch = async (event) => {
+    event.preventDefault()
 
     if (!countryToSearch) {
       console.log('Please specify a country to explore')
       // portal notif for this please
       return
     }
-    
-    const country = countryToSearch.trim().toLowerCase()
+  
 
     try {
-      const countryData = await fetchOneCountry(country)
-      console.log('country data', countryData)
+      console.log('to search', countryToSearch)
+      await fetchOneCountry(countryToSearch.trim().toLowerCase())
+      console.log('one country details', oneCountryDetails)
       //then navigate to country page
+      navigate(`/country/${countryToSearch}`)
     } catch (error) {
       console.log('error is', error)
       console.log('error is: Oops', error.response.data.error)
@@ -29,12 +38,22 @@ const CountrySearch = () => {
 
   }
 
+  const handleCountryToSearch = (event) => {
+    const country = event.target.value
+    console.log('country input', country)
+    setOneCountry(country.trim().toLowerCase() )
+    setCountryToSearch(country)
+  }
+
 
   return (
     <>
       <h2>Explore a country</h2>
-      <input type="text" name="search-country" value={countryToSearch} placeholder="japan..." onChange={({ target }) => setCountryToSearch(target.value)}/>
-      <button type="button" name="search-country-button" onClick={handleCountrySearch}>explore</button>
+      <form onSubmit={handleCountrySearch}>
+        <input type="text" name="search-country" value={countryToSearch} placeholder="enter a country..." onChange={handleCountryToSearch}/>
+        <button type="submit" name="search-country-button">explore</button>
+      </form>
+      <Outlet />
     </>
   )
 }

@@ -15,5 +15,46 @@
   padding: var(--card-padding);
   margin: var(--card-margin);
   border-radius: var(--card-border-radius);
+  height: max-content;
+  align-items: center;
+}
 
+.country-card .flag {
+  display: block;
+  margin: 5px auto;
+  height: 30%;
+  max-width: 200px;
+}
+
+.country-name-logos {
+  display: flex;
+  gap: 10px;
+}
+
+.country-name-logos h2 {
+  width: 70%;
+}
+
+.UN-lock-logos {
+  position: absolute;
+  right: 30px;
+  padding-top: 10px;
+  width: 20%;  
+  flex-wrap: wrap;
+}
+
+.UN-lock-logos img {
+  width: 50%;
+  justify-self: flex-end;
+  max-width: 70px;
+}
+
+.population {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  
+}
+.population-icon {
+  width: 20px;
 }
