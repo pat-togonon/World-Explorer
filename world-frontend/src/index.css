@@ -4,9 +4,9 @@
 
 :root {
   --card-padding: 5px 10px;
-  --card-margin: 10px 10px;
+  --card-margin: 20px 10px;
   --card-border-radius: 10px;
-  --card-bg-color: #FFF5EE;
+  --card-bg-color: #F8F8F8;
   --button-padding: 10px 10px;
 }
 
@@ -22,8 +22,8 @@
 .country-card .flag {
   display: block;
   margin: 5px auto;
-  height: 30%;
-  max-width: 200px;
+  width: max-content;
+  
 }
 
 .country-name-logos {
@@ -57,4 +57,14 @@
 }
 .population-icon {
   width: 20px;
+}
+
+.coat-of-arms-icon {
+  width: 20px;
+}
+
+.card-independent {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

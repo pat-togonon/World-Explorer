@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-const PercentPopulation = ({ country }) => {
+export const PercentPopulation = ({ country }) => {
   const percent = ((country.population * 100) / import.meta.env.VITE_WORLD_POPULATION_2025).toFixed(2)
 
   if (country.population === 0) {
@@ -67,9 +67,12 @@ const CountryFeed = ({ allCountries }) => {
                 </div>
               </div>
             <img src={country.flags.png} className="flag"/>
+            <div className="card-independent">
+            {country.independent && <img src={country.coatOfArms.svg} className="coat-of-arms-icon"/>}
             <p>{country.name.official}</p>
+            </div>
             <p>Capital: {country.capital}</p>
-            <p className="population"><img src='/population.svg' className="population-icon"/>{<PercentPopulation country={country} />}</p>
+            <p className="population"><img src='/population.svg' className="population-icon" />{<PercentPopulation country={country} />}</p>
             </div>
             
 
