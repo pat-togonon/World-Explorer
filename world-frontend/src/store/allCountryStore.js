@@ -6,7 +6,7 @@ export const useAllCountryStore = create((set) => ({
   allCountries: [],
   fetchCountries: async () => {
     const data = await fetchAllCountry()
-    set({ allCountries: data })
+    set({ allCountries: data.sort((a, b) => a.cca3.localeCompare(b.cca3)) })
   },
 
 }))

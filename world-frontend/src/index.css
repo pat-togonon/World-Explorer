@@ -68,3 +68,62 @@
   align-items: center;
   gap: 5px;
 }
+
+.country-page h1 {
+  text-align: center;
+}
+
+.country-page-coat-of-arms-svg {
+  width: 50px;
+}
+
+.country-page-under-name-div, .country-page-overview {
+  display: flex; 
+  justify-content: center;
+  gap: 50px;
+}
+
+.country-page-under-name-div div, .country-page-overview div {
+  width: 130px;
+  
+}
+
+.country-page-under-name-div h4, .country-page-under-name-div p, .country-page-overview p {
+  text-align: center;
+  padding: 5px 0px;
+  margin: 0px 0px;
+}
+
+.country-page-overview img {
+  display: block;
+  margin: 0 auto;
+}
+
+.country-page-nav-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 1rem;
+ padding: 1rem;
+ text-align: center;
+}
+
+.country-page-nav-item {
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.active {
+  background-color: yellow;
+}
+.country-page-nav-item img {
+  width: 50px;
+  margin-bottom: 0;
+}
+
+.country-page-nav-item:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  font-weight: bold;
+  background-color: pink;
+  
+}

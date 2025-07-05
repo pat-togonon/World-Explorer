@@ -20,7 +20,8 @@ const App = () => {
       <Route path="/" element={<CountrySearch />}>
         <Route index element={<CountryFeed allCountries={allCountries} />} />
       </Route>
-      <Route path="/country/:country" element={<CountryPage />} />
+      <Route path="/country/:country/*" element={<CountryPage />} />
+
     </Routes>
     </>
   )

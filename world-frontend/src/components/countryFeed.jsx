@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 
+export const HandleGoingBackUp = (_event) => {
+  window.scrollTo({ top: 0, behavior: 'auto' }) 
+}
+
 export const PercentPopulation = ({ country }) => {
   const percent = ((country.population * 100) / import.meta.env.VITE_WORLD_POPULATION_2025).toFixed(2)
 
@@ -21,7 +25,7 @@ const CountryFeed = ({ allCountries }) => {
   const [visibleCountriesCount, setVisibleCountriesCount] = useState(5)
   const loaderRef = useRef()
 
-  const visibleCountries = allCountries.slice(0, visibleCountriesCount)
+  const visibleCountries = allCountries.sort((a, b) => b.name.common - a.name.common).slice(0, visibleCountriesCount)
 
   // add loader
   
@@ -47,10 +51,6 @@ const CountryFeed = ({ allCountries }) => {
       }
     }
   }, [])
-
-  const handleGoingBackUp = (_event) => {
-    window.scrollTo({ top: 0, behavior: 'auto' }) 
-  }
 
 
   return (
@@ -80,7 +80,7 @@ const CountryFeed = ({ allCountries }) => {
         ))}
         <div ref={loaderRef} style={{ height: '1px' }} />
       </div>
-      {visibleCountries.length < visibleCountriesCount && <button type="button" onClick={handleGoingBackUp}>You have seen all the countries. Click here to go back up.</button>}      
+      {visibleCountries.length < visibleCountriesCount && <button type="button" onClick={HandleGoingBackUp}>You have seen all the countries. Click here to go back up.</button>}      
     </>
   )
 
