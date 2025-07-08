@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const HandleGoingBackUp = (_event) => {
   window.scrollTo({ top: 0, behavior: 'auto' }) 
@@ -23,6 +24,7 @@ const CountryFeed = ({ allCountries }) => {
   console.log('rendering feed...')
 
   const [visibleCountriesCount, setVisibleCountriesCount] = useState(5)
+  const navigate = useNavigate()
   const loaderRef = useRef()
 
   const visibleCountries = allCountries.sort((a, b) => b.name.common - a.name.common).slice(0, visibleCountriesCount)
@@ -53,11 +55,12 @@ const CountryFeed = ({ allCountries }) => {
   }, [])
 
 
+  console.log('countries', visibleCountries)
   return (
     <>
       <div>
         {visibleCountries.map(country => (
-          <div key={country.cca3} className="country-card">
+          <div key={country.cca3} className="country-card" onClick={() => navigate(`/country/${country.name.common.toLowerCase()}`)}>
             <div>
               <div className="country-name-logos">
                 <h2>{country.name.common}</h2>

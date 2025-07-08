@@ -15,12 +15,15 @@ const UnitedNationMember = ({ UN }) => {
 
 const Overview = ({ countryDetails }) => {
 
+  console.log('coat', countryDetails.coatOfArms.svg)
   return (
     <>
       <h2>Overview</h2>  
+      <h3>Flag</h3>
+      <img src={countryDetails.flags.png} />  
       <div className="country-page-overview">
         <div>
-          {countryDetails.independent ? <img src={countryDetails.coatOfArms.svg} className="country-page-coat-of-arms-svg"/> : <img src='/non-coat.svg' />}
+          {countryDetails.independent ? <img src={countryDetails.coatOfArms.png} className="country-page-coat-of-arms-svg" /> : <img src='/non-coat.svg' />}
           <p>{countryDetails.independent ? "Independent country" : "Not fully independent"}</p>
         </div>
         <div>

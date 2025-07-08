@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useOneCountryStore } from "../store/oneCountryStore"
-import { useParams, Outlet, Routes, Route, useNavigate } from "react-router-dom"
+import { useParams, Routes, Route, useNavigate } from "react-router-dom"
 import { useAllCountryStore } from "../store/allCountryStore"
 import Overview from "./countryPage/overview"
 import PeopleAndLanguage from "./countryPage/peopleAndLangugage"
@@ -8,6 +8,7 @@ import LocationAndGeography from "./countryPage/locationAndGeography"
 import Economy from "./countryPage/economy"
 import SystemsAndInfrastructure from "./countryPage/systemsAndInfrastructure"
 import TimezoneAndWeekStart from "./countryPage/time"
+import { HandleGoingBackUp } from "./countryFeed"
 
 const CountryPage = () => {
 
@@ -18,6 +19,7 @@ const CountryPage = () => {
   // with download printables / as pdf
 
   const [currentTab, setCurrentTab] = useState('')
+  const [isLoading, setisLoading] = useState(true)
   
   const oneCountry = useOneCountryStore(state => state.oneCountry)
   const setOneCountry = useOneCountryStore(state => state.setOneCountry)
@@ -26,6 +28,7 @@ const CountryPage = () => {
   const allCountries = useAllCountryStore(state => state.allCountries)
   const { country } = useParams()
   const navigate = useNavigate()
+  console.log('one country store', oneCountry)
 
   useEffect(() => {
     
@@ -33,14 +36,18 @@ const CountryPage = () => {
       console.log('fetching one country details...')
       setOneCountry(country)
       fetchOneCountry(country)
+      setisLoading(!isLoading)
     }
   
   }, [country])
 
+  useEffect(() => {
+    HandleGoingBackUp()
+  })
 
-  if (countryDetails.length === 0 || allCountries.length === 0) {
-    // add a loader?
-    return <div>Country not found or loading...</div>
+
+  if (countryDetails.length === 0 || allCountries.length === 0 || isLoading || oneCountry !== country) {
+    return <div className="loading-spinner"></div>
   }
 
   console.log('details', countryDetails)
@@ -75,9 +82,15 @@ const CountryPage = () => {
     navigate(`/country/${oneCountry}/system-and-infrastructure`)
   }
 
+  const handleCountry = (_event) => {
+    setCurrentTab('')
+    navigate(`/country/${oneCountry}`)
+  }
+
   return (
     <div className="country-page">
-      <h1>{countryDetails.name.common}</h1>
+      <button onClick={() => navigate('/')}>Return Home</button>
+      <h1 onClick={handleCountry}>{countryDetails.name.common}</h1>
       <div className="country-page-under-name-div">
       <div>
         <p>Official name</p>
@@ -88,21 +101,18 @@ const CountryPage = () => {
         <h4>{countryDetails.capital.map(c => c).join(', ')}</h4>
       </div>}
       </div>
-      <h3>Flag</h3>
-      <img src={countryDetails.flags.png} />  
-
       <div className="country-page-nav-grid">
         <div className={currentTab === 'overview' ? "country-page-nav-item active" : "country-page-nav-item"} role="button" onClick={handleOverview}>
           <img src="/overview-icon.svg"/>
           <p>Overview</p>
         </div>
+        <div className={currentTab === 'location' ? "country-page-nav-item active" : "country-page-nav-item"} role="button" onClick={handleLocation}>
+          <img src="/map-icon-pin.svg" />
+          <p>Geography</p>
+        </div>
         <div className={currentTab === 'economy' ? "country-page-nav-item active" : "country-page-nav-item"} role="button" onClick={handleEconomy}>
           <img src="/chart-icon.svg"/>
           <p>Economy</p>
-        </div>
-        <div className={currentTab === 'location' ? "country-page-nav-item active" : "country-page-nav-item"} role="button" onClick={handleLocation}>
-          <img src="/map-icon-pin.svg" />
-          <p>Location</p>
         </div>
         <div className={currentTab === 'people' ? "country-page-nav-item active" : "country-page-nav-item"} role="button" onClick={handlePeople}>
           <img src="/people-icon.svg" />

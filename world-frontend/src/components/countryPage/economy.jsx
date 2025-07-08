@@ -1,6 +1,3 @@
-import { useEffect } from "react"
-import { HandleGoingBackUp } from "../countryFeed"
-
 const Gini = ({ gini }) => {
   const year = Object.keys(gini)
   const value = Object.values(gini)

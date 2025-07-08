@@ -12,7 +12,7 @@ const SystemsAndInfrastructure = ({ countryDetails }) => {
     <>
       <h2>System and Infrastructure</h2>
       <p>When you call someone in {countryDetails.name.common}, {countryDetails.idd.root} is the number you start with.</p>
-      <p>Websites from {countryDetails.name.common} usually end with {countryDetails.tld?.map(t => t).join(', or ')}.</p>
+      <p>Websites from {countryDetails.name.common} usually end with {countryDetails.tld?.map(t => t).join(' or ')}.</p>
       <p>In {countryDetails.name.common}, drivers sit on the {countryDetails.car.side === 'right' ? 'left' : 'right'} side of the car and keep to the {countryDetails.car.side} side of the road.</p>
     </>
   )

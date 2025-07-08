@@ -21,13 +21,13 @@ const Borders = ({ country, allCountries }) => {
 const LandLocked = ({ country, allCountries }) => {
 
   if (!country.landlocked && !country.borders) {
-    return <div>Island nation. No land borders and surrounded by sea.</div>
+    return <div>{country.name.common} is an island nation. No land borders and surrounded by sea.</div>
   }
 
   if (!country.landlocked && country.borders) {
     return (
       <>
-      <p>This country touches other nations on land but still has a coastline to the ocean.</p>
+      <p>{country.name.common} touches other nations on land but still has a coastline to the ocean.</p>
       <Borders country={country} allCountries={allCountries} />
       </>
     )
@@ -35,7 +35,7 @@ const LandLocked = ({ country, allCountries }) => {
 
   return (
     <>
-      <p>Surrounded by land, with neighbors on all sides.</p>
+      <p>{country.name.common} is surrounded by land with neighbors on all sides (landlocked).</p>
       <Borders country={country} allCountries={allCountries} />
     </>
   )
